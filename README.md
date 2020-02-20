@@ -29,7 +29,7 @@ The script `fix-nglview.sh` contains a few commands to make sure that the Jupyte
 The last step will take some time, and a new prompt returns when its done. You can now return to Jupyter Lab in your browser and check with the notebook `ASE.ipynb` that everything works as expected.
 
 
-#### I don't know where to find the address or the token to access Jupyter Lab!
+#### HELP: I don't know where to find the address or the token to access Jupyter Lab!
 
 Remember that you can **always** go back to Jupyter Lab by opening the browser and going to `https://localhost:8888`. If you have Docker Toolbox for Windows, please refer to our setup guide to know which address to use.
 
