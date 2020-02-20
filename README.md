@@ -20,7 +20,7 @@ The script `fix-nglview.sh` contains a few commands to make sure that the Jupyte
 
 2. Restart the container
 
-    1. If you started the container **without** `JUPYTER_ENABLE_LAB=yes` by following the pre-course setup PDF, then refer to the [previous section]()
+    1. If you started the container **without** `JUPYTER_ENABLE_LAB=yes` by following the pre-course setup PDF, then refer to the [previous section](https://github.com/edoardob90/mmm2020/blob/master/README.md#note-start-a-container-with-jupyter-lab)
     
     2. If you stopped the container, you can restart the one we used in the first lecture with `docker container start <NAME>`. To get the name of the container even if it's stopped, use `docker container ls -a` (notice the `-a` which means **all** the containers, stopped or running) and take note of the container's name under the `NAME` column.
 
