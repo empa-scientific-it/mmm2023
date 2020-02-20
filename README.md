@@ -1,10 +1,28 @@
 # Fix `nglview` in Jupyter Lab
 
+### NOTE: Start a container with Jupyter Lab
+
+This fix is required to make **nglview** work with Jupyter Lab. If you **did not** run the container with the option `-e JUPYTER_ENABLE_LAB=yes`, you should first stop and remove the container we used during the introductory lecture. To do so:
+
+1. Retrieve the name of the running (or stopped) container with `docker container ls -a`.
+
+2. Remove the container with `docker container rm -f <NAME>`
+
+3. **Be sure** to be in your MMM2020 directory. And remember that the shortcut `$(pwd)` used in the command below only works on Linux, macOS or in the Docker Quickstart Terminal. If you are using Windows PowerShell, replace `$(pwd)` with `${pwd}`.
+
+4. Run a new container with `docker container run -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes -v $(pwd):/home/jovyan/mmm2020 baldone/mmm2020`
+
+---
+
 The script `fix-nglview.sh` contains a few commands to make sure that the Jupyter extension [nglview](https://github.com/arose/nglview/releases) works also within a notebook opened in Jupyter Lab. Follow the steps to run the script:
 
 1. Make sure that the Docker container we set up during the first lecture is running. To do so, run in a terminal `docker container ls`. You should see at least a line saying that a container from the image `baldone/mmm2020` is up (check the `STATUS` column).
 
-2. If no container is running, you can restart the one we used in the first lecture with `docker container start <NAME>`. To get the name of the container even if it's stopped, use `docker container ls -a` (notice the `-a` which means **all** the containers, stopped or running) and take note of the container's name under the `NAME` column.
+2. Restart the container
+
+    1. If you started the container **without** `JUPYTER_ENABLE_LAB=yes` by following the pre-course setup PDF, then refer to the [previous section]()
+    
+    2. If you stopped the container, you can restart the one we used in the first lecture with `docker container start <NAME>`. To get the name of the container even if it's stopped, use `docker container ls -a` (notice the `-a` which means **all** the containers, stopped or running) and take note of the container's name under the `NAME` column.
 
 3. With a running container, issue the following command: `docker container exec -it <NAME> bash -c 'wget https://raw.githubusercontent.com/edoardob90/mmm2020/master/fix-nglview.sh && chmod +x fix-nglview.sh && ./fix-nglview.sh'`. Again, `NAME` is the container's name you discovered in the previous step.
 
@@ -38,7 +56,7 @@ You can then easily retrieve the token or open directly the link from the output
 
 # Prepare and run the Docker container
 
-## NOTE
+### NOTE
 
 The following is needed **only** if:
 
