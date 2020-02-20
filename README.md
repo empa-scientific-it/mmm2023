@@ -1,22 +1,4 @@
-# Quick README
-
-Create a folder where to store your personal data. This folder will be visible from within the container.
-
-```
-mkdir -p ${HOME}/mmm2020
-cd ${HOME}/mmm2020
-```
-
-With Docker installed, open a terminal (Bash on Linux/macOS or Quickstart Terminal on Windows) and run
-
-```
-docker container run -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes -v $(pwd):/home/jovyan/mmm2020 baldone/mmm2020
-```
-
-**A note for Windows user:** if you are using Docker Toolbox for Windows, you can issue the above commands from Docker Quickstart Terminal which emulates a Bash shell. If you are using Docker for Windows (only Windows 10 Pro/Enteprise), then you might want to use Windows PowerShell. Create your working drectory and use its path accordingly.
-
-
-## Fix `nglview` in Jupyter Lab
+# Fix `nglview` in Jupyter Lab
 
 The script `fix-nglview.sh` contains a few commands to make sure that the Jupyter extension [nglview](https://github.com/arose/nglview/releases) works also within a notebook opened in Jupyter Lab. Follow the steps to run the script:
 
@@ -52,3 +34,31 @@ Executing the command: jupyter lab
 ```
 
 You can then easily retrieve the token or open directly the link from the output log.
+
+
+# Prepare and run the Docker container
+
+## NOTE
+
+The following is needed **only** if:
+
+1. You never started the container as explained in the pre-course setup
+
+2. You removed by mistake or on purpose the container we used during the first lecture.
+
+---
+
+Create a folder where to store your personal data. This folder will be visible from within the container.
+
+```
+mkdir -p ${HOME}/mmm2020
+cd ${HOME}/mmm2020
+```
+
+With Docker installed, open a terminal (Bash on Linux/macOS or Quickstart Terminal on Windows) and run
+
+```
+docker container run -p 8888:8888 -e JUPYTER_ENABLE_LAB=yes -v $(pwd):/home/jovyan/mmm2020 baldone/mmm2020
+```
+
+**A note for Windows user:** if you are using Docker Toolbox for Windows, you can issue the above commands from Docker Quickstart Terminal which emulates a Bash shell. If you are using Docker for Windows (only Windows 10 Pro/Enteprise), then you might want to use Windows PowerShell. Create your working drectory and use its path accordingly.
