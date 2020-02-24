@@ -1,6 +1,6 @@
 # Fix `nglview` in Jupyter Lab
 
-### NOTE: Start a container with Jupyter Lab
+### How to start a container with Jupyter Lab
 
 This fix is required to make **nglview** work with Jupyter Lab. If you **did not** run the container with the option `-e JUPYTER_ENABLE_LAB=yes`, you should first stop and remove the container we used during the introductory lecture. To do so:
 
