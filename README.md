@@ -17,6 +17,16 @@ cd ${HOME}/mmm2023
 
 Then, add the following option to the `docker container run` command above: `-v ${pwd}:/home/jovyan/mmm2023`.
 
-### Clone the extra repositories
+## Extra steps
 
-To clone the extra repositories, run the utility script `clone-repo.sh` from a terminal **inside the container**.
+### Install `librascal` Python bindings
+
+In a terminal **inside the container**, run the command
+
+```
+cd /home/jovyan/librascal && pip install .
+```
+
+### Clone the repositories
+
+To clone the extra repositories, run the utility script `clone-repo.sh` in a terminal **inside the container**.
