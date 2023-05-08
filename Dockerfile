@@ -1,5 +1,3 @@
-# Docker image file
-# Pulling from jupyter/scipy-notebook
 FROM jupyter/base-notebook
 
 USER root
@@ -25,20 +23,19 @@ WORKDIR /home/${NB_USER}
 # Create a directory for the course material
 RUN mkdir -p mmm2023
 
-# Clone additional repositories
-WORKDIR /home/${NB_USER}/mmm2023
-
-RUN git clone https://github.com/lab-cosmo/kernel-tutorials.git && \ 
-  git clone https://github.com/ramador09/Molecular-and-Materials-Modelling-FS2023.git
-
 # Create a container volume to make data persistent
 VOLUME /home/${NB_USER}/mmm2023
 
-# Download and compile librascal
-RUN git clone https://github.com/cosmo-epfl/librascal .librascal
+# Download librascal & install Python bindings
+RUN mkdir -p /home/${NB_USER}/librascal && \
+  cd /home/${NB_USER}/librascal && \
+  git clone https://github.com/lab-cosmo/librascal .
 
-RUN mkdir -p .librascal/build && \
-  cd .librascal/build && \
+# Compile C++ library
+RUN cd /home/${NB_USER}/librascal && \
+  pip install -r requirements.txt && \
+  mkdir -p build && \
+  cd build && \
   cmake -DUSER=ON -DCMAKE_BUILD_TYPE=Release -DBUILD_TESTS=ON -DBUILD_BINDINGS=ON .. && \
   make install
 
@@ -51,22 +48,11 @@ RUN conda install --quiet --yes \
   'scikit-learn'
 
 RUN conda install -y -c conda-forge \
+  'nglview==3.0.4' \
+  'ipywidgets==7.7.5' \
   'skmatter' \
-  'ipywidgets' \
   'ase' \
-  'nglview' \
   'spglib'
-
-# conda clean --all -f -y && \
-# jupyter nbextension enable --py --sys-prefix nglview && \
-# jupyter nbextension enable --py --sys-prefix widgetsnbextension && \
-# jupyter labextension install @jupyter-widgets/jupyterlab-manager && \
-# jupyter labextension install nglview-js-widgets@2.7.1 && \
-# rm -rf $CONDA_DIR/share/jupyter/lab/staging && \
-# rm -rf /home/$NB_USER/.cache/yarn && \
-# rm -rf /home/$NB_USER/.node-gyp && \
-# fix-permissions $CONDA_DIR && \
-# fix-permissions /home/$NB_USER
 
 # Switch to normal user
 WORKDIR /home/${NB_USER}
